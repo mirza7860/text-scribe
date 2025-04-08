@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,7 @@ import {
 import { SummaryItem } from "@/utils/types";
 import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 import { deleteSummary, clearAllSummaries } from "@/utils/storage";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,

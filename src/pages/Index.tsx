@@ -9,7 +9,7 @@ import { extractTextFromImage, detectLanguage } from "@/utils/textProcessing";
 import { mockTranslate, mockSummarize } from "@/utils/mockAPI";
 import { getSummaries } from "@/utils/storage";
 import { SummaryItem } from "@/utils/types";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import ISO6391 from "@/utils/languageUtils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Camera, FileText, ListChecks } from "lucide-react";

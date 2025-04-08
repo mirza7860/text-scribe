@@ -1,7 +1,7 @@
 
 import { createWorker } from "tesseract.js";
 import { franc } from "franc";
-import ISO6391 from "iso-639-1";
+import ISO6391 from "@/utils/languageUtils";
 
 // Helper function to map language codes between franc and ISO standards
 const mapLangCode = (francCode: string): string => {
