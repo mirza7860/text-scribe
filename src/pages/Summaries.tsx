@@ -159,13 +159,6 @@ const Summaries = () => {
                 <DialogTitle className="text-xl font-semibold text-gradient">
                   Summary Details
                 </DialogTitle>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setDialogOpen(false)}
-                >
-                  <X size={18} />
-                </Button>
               </div>
             </DialogHeader>
 
