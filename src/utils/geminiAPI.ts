@@ -1,9 +1,8 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// This is a placeholder API key for demonstration. In a production environment, 
-// this should be stored in a secure environment variable
-const API_KEY = "YOUR_GEMINI_API_KEY";
+// Using the provided API key
+const API_KEY = "AIzaSyBo7a64UiZZIkxPNvt4Q36cPsutf-UJ_YQ";
 
 // Initialize the Gemini API
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -15,19 +14,13 @@ const genAI = new GoogleGenerativeAI(API_KEY);
  */
 export const summarizeWithGemini = async (text: string): Promise<string> => {
   try {
-    if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY") {
-      throw new Error("Gemini API key not configured. Using fallback summarization.");
-    }
-
-    // For texts that are too short, return original
-    if (text.split(" ").length < 20) {
-      return text;
-    }
-
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    // Use the specified model: gemini-2.0-flash-lite
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-2.0-flash-lite" 
+    });
     
-    const prompt = `Summarize the following text in a concise and clear manner. 
-    Focus on the main points and key information. Format the summary with bullet points.
+    const prompt = `Summarize the following text concisely and clearly. 
+    Focus on the most important points and key information:
     
     TEXT TO SUMMARIZE:
     ${text}`;
@@ -40,7 +33,7 @@ export const summarizeWithGemini = async (text: string): Promise<string> => {
   } catch (error) {
     console.error("Error using Gemini API:", error);
     
-    // Fallback to basic summarization
+    // Fallback to basic summarization if API call fails
     const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
     
     if (sentences.length <= 3) {
