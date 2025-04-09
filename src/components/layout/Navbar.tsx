@@ -80,11 +80,6 @@ const Navbar: React.FC = () => {
             >
               About
             </Link>
-            <Button asChild variant="default" className="w-full mt-2">
-              <Link to="/process" onClick={() => setIsMenuOpen(false)}>
-                Get Started
-              </Link>
-            </Button>
           </div>
         )}
       </div>
