@@ -1,4 +1,5 @@
 
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Using the provided API key
@@ -45,5 +46,37 @@ export const summarizeWithGemini = async (text: string): Promise<string> => {
     const lastSentence = sentences[sentences.length - 1];
     
     return `Summary:\n\n• ${firstSentence}.\n• ${middleSentence}.\n• ${lastSentence}.`;
+  }
+};
+
+/**
+ * Translate text using Google's Gemini API
+ * @param text Text to translate
+ * @param sourceLanguage Source language name
+ * @returns Translated text
+ */
+export const translateWithGemini = async (text: string, sourceLanguage: string): Promise<string> => {
+  try {
+    // Use the specified model: gemini-2.0-flash-lite
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-2.0-flash-lite" 
+    });
+    
+    const prompt = `Translate the following text from ${sourceLanguage} to English. 
+    Maintain the original meaning, tone, and style as much as possible.
+    
+    TEXT TO TRANSLATE:
+    ${text}`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const translation = response.text();
+    
+    return translation || text;
+  } catch (error) {
+    console.error("Error using Gemini API for translation:", error);
+    
+    // Fallback if API call fails
+    return `[Translation from ${sourceLanguage} to English failed - API error]\n\n${text}`;
   }
 };

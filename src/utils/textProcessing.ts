@@ -1,7 +1,8 @@
+
 import { createWorker } from "tesseract.js";
 import { franc } from "franc";
 import ISO6391 from "@/utils/languageUtils";
-import { summarizeWithGemini } from "./geminiAPI";
+import { summarizeWithGemini, translateWithGemini } from "./geminiAPI";
 
 // Helper function to map language codes between franc and ISO standards
 const mapLangCode = (francCode: string): string => {
@@ -63,7 +64,7 @@ export const detectLanguage = (text: string): { code: string; name: string } => 
   }
 };
 
-// Translate text (simplified mock version for now - in production you would use a real translation API)
+// Translate text using Gemini
 export const translateText = async (
   text: string,
   sourceLang: string
@@ -73,7 +74,8 @@ export const translateText = async (
   }
   
   try {
-    return `[Translation from ${ISO6391.getName(sourceLang) || sourceLang} to English]\n\n${text}`;
+    const languageName = ISO6391.getName(sourceLang) || sourceLang;
+    return await translateWithGemini(text, languageName);
   } catch (error) {
     console.error("Translation error:", error);
     throw new Error("Failed to translate text");
