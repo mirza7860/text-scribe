@@ -1,16 +1,14 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import ImageInput from "@/components/ImageInput";
 import ProcessingControls from "@/components/ProcessingControls";
 import ResultsDisplay from "@/components/ResultsDisplay";
 import SummaryHistory from "@/components/SummaryHistory";
-import { extractTextFromImage, detectLanguage } from "@/utils/textProcessing";
-import { mockTranslate, mockSummarize } from "@/utils/mockAPI";
+import { extractTextFromImage, detectLanguage, summarizeText } from "@/utils/textProcessing";
+import { translateText } from "@/utils/textProcessing";
 import { getSummaries } from "@/utils/storage";
 import { SummaryItem } from "@/utils/types";
 import { toast } from "sonner";
-import ISO6391 from "@/utils/languageUtils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Camera, FileText, ListChecks } from "lucide-react";
 
@@ -67,7 +65,7 @@ const Index = () => {
       // Step 3: Translate if not in English
       if (lang.code !== "en") {
         toast.info(`Translating from ${lang.name} to English...`);
-        const translated = await mockTranslate(text, lang.code);
+        const translated = await translateText(text, lang.code);
         setTranslatedText(translated);
         toast.success("Translation complete");
       }
@@ -75,7 +73,7 @@ const Index = () => {
       // Step 4: Summarize the text
       toast.info("Generating summary...");
       const textToSummarize = translatedText || text;
-      const summarized = await mockSummarize(textToSummarize);
+      const summarized = await summarizeText(textToSummarize);
       setSummary(summarized);
       toast.success("Summary generated");
 
@@ -95,9 +93,9 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto py-8 px-4">
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 text-gradient">Text Scribe</h1>
+          <h1 className="text-3xl font-bold mb-2 text-gradient">Process Your Images</h1>
           <p className="text-muted-foreground">
-            Extract, translate, and summarize text from images
+            Extract, translate, and summarize text from images with AI
           </p>
         </header>
 
@@ -121,7 +119,7 @@ const Index = () => {
         </div>
 
         {activeTab === "input" ? (
-          <ScrollArea className="h-[calc(100vh-200px)]">
+          <ScrollArea className="h-[calc(100vh-250px)]">
             <div className="space-y-4">
               <ImageInput onImageCapture={handleImageCapture} />
               
@@ -144,7 +142,7 @@ const Index = () => {
             </div>
           </ScrollArea>
         ) : (
-          <ScrollArea className="h-[calc(100vh-200px)]">
+          <ScrollArea className="h-[calc(100vh-250px)]">
             <SummaryHistory
               summaries={summaries}
               onHistoryChange={loadSavedSummaries}
