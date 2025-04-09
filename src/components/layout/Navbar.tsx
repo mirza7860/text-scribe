@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { FileText, Home, Info, Menu, X } from "lucide-react";
+import { FileText, Home, Info, Menu, X, ListChecks } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -25,6 +25,10 @@ const Navbar: React.FC = () => {
             </Link>
             <Link to="/process" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors">
               Process Text
+            </Link>
+            <Link to="/summaries" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors flex items-center gap-1">
+              <ListChecks size={16} />
+              Summaries
             </Link>
             <Link to="/about" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors">
               About
@@ -60,6 +64,14 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Process Text
+            </Link>
+            <Link 
+              to="/summaries" 
+              className="block px-3 py-2 rounded-md text-foreground hover:bg-muted transition-colors flex items-center gap-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <ListChecks size={16} />
+              Summaries
             </Link>
             <Link 
               to="/about" 
