@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,9 +5,9 @@ import { FileText, Home, Info, Menu, X, ListChecks } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+
   return (
     <nav className="bg-background sticky top-0 z-50 border-b border-border shadow-sm">
       <div className="container mx-auto px-4 py-3">
@@ -17,21 +16,27 @@ const Navbar: React.FC = () => {
             <FileText className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold text-gradient">TextScribe</span>
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors">
+            <Link
+              to="/"
+              className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors"
+            >
               Home
             </Link>
-            <Link to="/process" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors">
+            <Link
+              to="/process"
+              className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors"
+            >
               Process Text
             </Link>
-            <Link to="/summaries" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors flex items-center gap-1">
+            <Link
+              to="/summaries"
+              className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors flex items-center gap-1"
+            >
               <ListChecks size={16} />
               Summaries
-            </Link>
-            <Link to="/about" className="px-3 py-2 rounded-md text-foreground hover:text-primary transition-colors">
-              About
             </Link>
             <Button asChild variant="default">
               <Link to="/process" className="px-4">
@@ -39,7 +44,7 @@ const Navbar: React.FC = () => {
               </Link>
             </Button>
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="md:hidden">
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
@@ -47,34 +52,34 @@ const Navbar: React.FC = () => {
             </Button>
           </div>
         </div>
-        
+
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden pt-2 pb-4 space-y-2 animate-fade-in">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="block px-3 py-2 rounded-md text-foreground hover:bg-muted transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
-            <Link 
-              to="/process" 
+            <Link
+              to="/process"
               className="block px-3 py-2 rounded-md text-foreground hover:bg-muted transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Process Text
             </Link>
-            <Link 
-              to="/summaries" 
+            <Link
+              to="/summaries"
               className="block px-3 py-2 rounded-md text-foreground hover:bg-muted transition-colors flex items-center gap-2"
               onClick={() => setIsMenuOpen(false)}
             >
               <ListChecks size={16} />
               Summaries
             </Link>
-            <Link 
-              to="/about" 
+            <Link
+              to="/about"
               className="block px-3 py-2 rounded-md text-foreground hover:bg-muted transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
